@@ -57,6 +57,17 @@
                         pageLabel: 'page', // for 'pages' mode
                         allLabel: 'All',
                       }">
+                        <template slot="table-row" slot-scope="props">
+                            <span v-if="props.column.field === 'html_url'">
+                                  <a :href="props.row.html_url" target="_blank"
+                                     style="color: blue;">
+                                      {{props.row.html_url}}
+                                  </a>
+                            </span>
+                            <span v-else>
+                              {{props.formattedRow[props.column.field]}}
+                            </span>
+                        </template>
                     </vue-good-table>
                 </div>
             </div>
@@ -93,7 +104,7 @@
                 },
                 {
                     label: "Repository URL",
-                    field: "url",
+                    field: "html_url",
                     filterable: true
                 },
             ]

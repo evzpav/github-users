@@ -43,7 +43,7 @@ app.get('/api/users/:username/repos', async (req, res) => {
     let username = req.params && req.params.username ? req.params.username : "";
     try {
         const headers = {"Accept": "application/vnd.github.mercy-preview+json"};
-        const users = await axios.get(`${baseURL}/users/${username}/repos?type=all&sort=pushed&direction=desc`, {headers});
+        const users = await axios.get(`${baseURL}/users/${username}/repos?type=owner&sort=pushed&direction=desc`, {headers});
         res.json(users.data)
     } catch (e) {
         res.status(500).json({error: e.toString()});
