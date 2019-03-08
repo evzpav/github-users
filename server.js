@@ -1,13 +1,16 @@
 const express = require('express');
 const axios = require('axios');
 const app = express();
+const cors = require('cors');
 const serveStatic = require('serve-static');
 
 const port = process.env.PORT || 3000;
 const baseURL = "https://api.github.com";
 axios.defaults.headers.common = {'Content-Type': 'application/json', 'User-Agent': 'evzpav'};
 
-app.use(serveStatic(__dirname+"/client/dist"));
+app.use(cors());
+
+app.use(serveStatic(__dirname + "/client/dist"));
 
 app.get('/api', (req, res) => res.send('Github users api!'));
 
@@ -23,7 +26,6 @@ app.get('/api/users', async (req, res) => {
     }
 
 });
-
 
 
 app.get('/api/users/:username/details', async (req, res, next) => {
