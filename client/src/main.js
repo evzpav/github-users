@@ -7,15 +7,15 @@ import VueGoodTablePlugin from 'vue-good-table';
 Vue.use(VueGoodTablePlugin);
 import 'vue-good-table/dist/vue-good-table.css';
 
-import VModal from 'vue-js-modal';
+import Buefy from 'buefy'
+import 'buefy/dist/buefy.css'
 
-Vue.use(VModal);
-
+Vue.use(Buefy)
 
 const router = new VueRouter({
   routes,
   mode: 'history',
-  base: "/app/"
+  base: "/"
 
 });
 
