@@ -1,6 +1,7 @@
 <template>
     <footer class="footer">
         <div class="content has-text-centered">
+            <br>
             <p>
                 Evandro Pavei - Florianópolis - 2019
             </p>

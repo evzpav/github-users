@@ -1,19 +1,44 @@
 <template>
     <div class="container">
-        <div class="columns">
-            <div v-if="isLoading" class="column is-four-fifths">Loading details...</div>
-            <div v-else class="column is-four-fifths">
-                <div>
-                    Id: {{userData.id}}
+        <div v-if="isLoading">Loading details...</div>
+        <div v-else class="columns">
+            <div class="column">
+                <br>
+                <br>
+                <div class="card">
+                    <div class="card-content">
+                        <div class="media">
+                            <div class="media-left">
+                                <figure class="image is-48x48">
+                                    <img :src="userData.avatar_url" alt="avatar" :title="userData.login">
+                                </figure>
+                            </div>
+                            <div class="media-content">
+                                <p class="title is-4">{{userData.login}}</p>
+                                <p class="subtitle is-6">ID: {{userData.id}}</p>
+                            </div>
+                        </div>
+
+                        <div class="content">
+                            <a :href="userData.url">{{userData.url}}</a>
+                            <br>
+                            <time>Account created at: {{userData.created_at | formatDateTime}}</time>
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    Login: {{userData.login}}
-                </div>
-                <div>
-                    Github url: {{userData.url}}
-                </div>
-                <div>Account created at: {{userData.created_at | formatDateTime}}
-                </div>
+            </div>
+
+            <div class="column is-three-fifths">
+
+                <section class="hero">
+                    <div class="hero-body">
+                        <div class="container">
+                            <h1 class="title">
+                                User Details
+                            </h1>
+                        </div>
+                    </div>
+                </section>
                 <div>
                     <vue-good-table
                             :columns="columns"
@@ -21,7 +46,7 @@
                             :pagination-options="{
                         enabled: true,
                         mode: 'records',
-                        perPage: 15,
+                        perPage: 10,
                         position: 'bottom',
                         dropdownAllowAll: false,
                         setCurrentPage: 1,
@@ -35,7 +60,10 @@
                     </vue-good-table>
                 </div>
             </div>
+
+            <div class="column"></div>
         </div>
+
 
     </div>
 </template>
@@ -48,7 +76,7 @@
             this.loadRepos()
         },
         data: () => ({
-            url:  process.env.NODE_ENV === 'production' ? window.location.origin : "http://localhost:3000",
+            url: process.env.NODE_ENV === 'production' ? window.location.origin : "http://localhost:3000",
             isLoading: false,
             userData: "",
             repos: "",
@@ -91,7 +119,7 @@
                     this.repos = repos.data
                 } catch (e) {
                     console.log(e)
-                }finally {
+                } finally {
                     this.isLoading = false;
                 }
 

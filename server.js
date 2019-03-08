@@ -15,7 +15,7 @@ app.get('/api', (req, res) => res.send('Github users api!'));
 
 app.get('/api/users', async (req, res) => {
 
-    let since = req.query && req.query.since ? req.query.since : 1;
+    let since = req.query && req.query.since ? req.query.since : 0;
 
     try {
         const users = await axios.get(`${baseURL}/users?since=${since}`);

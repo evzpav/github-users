@@ -1,9 +1,19 @@
 <template>
     <div class="container">
         <div class="columns">
-            <div v-if="isLoading" class="column is-three-quarters">Loading users...</div>
-            <div v-else class="column is-three-quarters">
-                <h1>Github Users List</h1>
+            <div class="column"></div>
+            <div v-if="isLoading" class="column is-three-fifths">Loading users...</div>
+            <div v-else class="column is-three-fifths">
+
+                <section class="hero">
+                    <div class="hero-body">
+                        <div class="container">
+                            <h1 class="title">
+                                Github Users List
+                            </h1>
+                        </div>
+                    </div>
+                </section>
                 <vue-good-table
                         @on-row-click="goToDetailsPage"
                         :columns="columns"
@@ -11,7 +21,7 @@
                         :pagination-options="{
                         enabled: true,
                         mode: 'records',
-                        perPage: 15,
+                        perPage: 10,
                         position: 'bottom',
                         dropdownAllowAll: false,
                         setCurrentPage: 1,
@@ -24,6 +34,7 @@
                       }">
                 </vue-good-table>
             </div>
+            <div class="column"></div>
         </div>
 
 
