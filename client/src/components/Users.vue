@@ -1,11 +1,14 @@
 <template>
-    <div class="hello">
-        <div style="width: 50%; ">
-            <vue-good-table
-                    @on-row-click="goToDetailsPage"
-                    :columns="columns"
-                    :rows="users"
-                    :pagination-options="{
+    <div class="container">
+        <div class="columns">
+            <div v-if="isLoading" class="column is-three-quarters" >Loading users...</div>
+            <div v-else class="column is-three-quarters">
+                <h1>Github Users List</h1>
+                <vue-good-table
+                        @on-row-click="goToDetailsPage"
+                        :columns="columns"
+                        :rows="users"
+                        :pagination-options="{
                         enabled: true,
                         mode: 'records',
                         perPage: 15,
@@ -19,16 +22,10 @@
                         pageLabel: 'page', // for 'pages' mode
                         allLabel: 'All',
                       }">
-                <!--<template slot="table-row" slot-scope="props">-->
-                <!--<span v-if="props.column.field === 'action'">-->
-                <!--action-->
-                <!--</span>-->
-                <!--<span v-else>-->
-                <!--{{props.formattedRow[props.column.field]}}-->
-                <!--</span>-->
-                <!--</template>-->
-            </vue-good-table>
+                </vue-good-table>
+            </div>
         </div>
+
 
     </div>
 </template>
@@ -36,12 +33,14 @@
 <script>
     import axios from "axios"
 
+
     export default {
         name: 'Users',
         mounted() {
             this.listUsers()
         },
         data: () => ({
+            isLoading: false,
             users: "",
             columns: [
                 {
@@ -54,22 +53,20 @@
                     field: "login",
                     filterable: true
                 },
-                // {
-                //     label: "Action",
-                //     field: "action",
-                //     filterable: true
-                // }
             ]
 
         }),
         methods: {
             async listUsers() {
+                this.isLoading = true;
                 try {
-                    const url = "http://localhost:3000";
-                    let users = await axios.get(url + "/api/users?since=0");
+                    const url = "http://localhost:3000"; //window.location.origin
+                    let users = await axios.get(url + "/api/users");
                     this.users = users.data
                 } catch (e) {
                     console.log(e)
+                } finally {
+                    this.isLoading = false;
                 }
 
             },
@@ -78,27 +75,8 @@
                 this.$router.push({path: `/details=${username}`})
             },
         },
+        components:{
+        }
     }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-    h3 {
-        margin: 40px 0 0;
-    }
-
-    ul {
-        list-style-type: none;
-        padding: 0;
-    }
-
-    li {
-        display: inline-block;
-        margin: 0 10px;
-    }
-
-    a {
-        color: #42b983;
-    }
-
-</style>

@@ -10,6 +10,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "buefy": "^0.7.3",
+    "spacetime": "^5.4.0",
     "vue": "^2.6.6",
     "vue-good-table": "^2.16.3",
     "vue-router": "^3.0.2"

@@ -6,7 +6,7 @@ const serveStatic = require('serve-static');
 
 const port = process.env.PORT || 3000;
 const baseURL = "https://api.github.com";
-axios.defaults.headers.common = {'Content-Type': 'application/json', 'User-Agent': 'evzpav'};
+axios.defaults.headers.common = {'Content-Type': 'application/json'};
 
 app.use(cors());
 
@@ -16,7 +16,7 @@ app.get('/api', (req, res) => res.send('Github users api!'));
 
 app.get('/api/users', async (req, res) => {
 
-    let since = req.query && req.query.since ? req.query.since : 0;
+    let since = req.query && req.query.since ? req.query.since : 1;
 
     try {
         const users = await axios.get(`${baseURL}/users?since=${since}`);
