@@ -3,7 +3,6 @@ const axios = require('axios');
 const app = express();
 const cors = require('cors');
 const serveStatic = require('serve-static');
-
 const port = process.env.PORT || 3000;
 const baseURL = "https://api.github.com";
 axios.defaults.headers.common = {'Content-Type': 'application/json'};
@@ -22,7 +21,7 @@ app.get('/api/users', async (req, res) => {
         const users = await axios.get(`${baseURL}/users?since=${since}`);
         res.json(users.data)
     } catch (e) {
-        res.status(500).json({error: error.toString()});
+        res.status(500).json({error: e.toString()});
     }
 
 });

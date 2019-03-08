@@ -1,7 +1,7 @@
 #github-users
 
 
-## To run locally
+## To run server locally
 ```bash
 
 #install server dependencies:

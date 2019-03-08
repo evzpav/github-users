@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <div class="columns">
-            <div v-if="isLoading">Loading details...</div>
+            <div v-if="isLoading" class="column is-four-fifths">Loading details...</div>
             <div v-else class="column is-four-fifths">
                 <div>
                     Id: {{userData.id}}
@@ -48,6 +48,7 @@
             this.loadRepos()
         },
         data: () => ({
+            url:  process.env.NODE_ENV === 'production' ? window.location.origin : "http://localhost:3000",
             isLoading: false,
             userData: "",
             repos: "",
@@ -74,8 +75,7 @@
             async loadDetails() {
                 this.isLoading = true;
                 try {
-                    const url = "http://localhost:3000"; //window.location.origin
-                    const userDetails = await axios.get(`${url}/api/users/${this.username}/details`);
+                    const userDetails = await axios.get(`${this.url}/api/users/${this.username}/details`);
                     this.userData = userDetails.data
                 } catch (e) {
                     console.log(e)
@@ -87,8 +87,7 @@
             async loadRepos() {
                 this.isLoading = true;
                 try {
-                    const url = "http://localhost:3000"; //window.location.origin
-                    const repos = await axios.get(`${url}/api/users/${this.username}/repos`);
+                    const repos = await axios.get(`${this.url}/api/users/${this.username}/repos`);
                     this.repos = repos.data
                 } catch (e) {
                     console.log(e)
