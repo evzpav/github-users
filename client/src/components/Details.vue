@@ -14,7 +14,7 @@
         methods: {
             loadDetails() {
                 try {
-                    
+
                 } catch (e) {
 
                 }

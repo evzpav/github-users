@@ -28,15 +28,26 @@ app.get('/api/users', async (req, res) => {
 });
 
 
-app.get('/api/users/:username/details', async (req, res, next) => {
-    let username = req.params && req.params.username ? req.params.username : "evzpav";
+app.get('/api/users/:username/details', async (req, res) => {
+    let username = req.params && req.params.username ? req.params.username : "";
     try {
-
-        // const users = await axios.get(`${baseURL}/users/${username}/hovercard`, {headers: "Accept:  application/vnd.github.hagar-preview+json"});
-        // res.json(users.data)
+        const users = await axios.get(`${baseURL}/users/${username}`);
+        res.json(users.data)
     } catch (e) {
         res.status(500).json({error: e.toString()});
-        next(e)
+    }
+
+});
+
+
+app.get('/api/users/:username/repos', async (req, res) => {
+    let username = req.params && req.params.username ? req.params.username : "";
+    try {
+        const headers = {"Accept": "application/vnd.github.mercy-preview+json"};
+        const users = await axios.get(`${baseURL}/users/${username}/repos?type=all&sort=pushed&direction=desc`, {headers});
+        res.json(users.data)
+    } catch (e) {
+        res.status(500).json({error: e.toString()});
     }
 
 });
