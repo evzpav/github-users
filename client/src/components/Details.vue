@@ -20,7 +20,7 @@
                         </div>
 
                         <div class="content">
-                            <a :href="userData.url">{{userData.url}}</a>
+                            <a :href="userData.html_url" target="_blank">{{userData.html_url}}</a>
                             <br>
                             <time>Account created at: {{userData.created_at | formatDateTime}}</time>
                         </div>
