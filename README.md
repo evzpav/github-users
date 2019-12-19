@@ -1,4 +1,4 @@
-#github-users
+# Github Users
 
 
 ## To run server locally
