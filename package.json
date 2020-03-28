@@ -1,16 +1,15 @@
 {
-  "name": "server",
+  "name": "github-users-server",
   "version": "1.0.0",
   "description": "github users rest api",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
   "author": "evzpav",
   "license": "ISC",
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.18.1",
     "cors": "^2.8.5",
     "express": "^4.16.4",
     "serve-static": "^1.13.2"
